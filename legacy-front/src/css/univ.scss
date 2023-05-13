@@ -1,0 +1,138 @@
+$dark0: #222;
+$light0: #eee;
+
+$gray0: #666;
+$gray1: #aaa;
+$gray2: #ccc;
+
+$ltext-color: #111;
+$dtext-color: #efefef;
+
+$sig0: #92a8d1;
+
+@mixin horizontal-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+@mixin vertical-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+@mixin dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+@mixin mobile {
+    @media (max-width: 700px) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin trans($property, $duration) {
+    transition: $property, $duration
+}
+
+
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+
+* {
+    font-family: 'Spoqa Han Sans Neo', 'Noto Sans KR', 'sans-serif';
+    -webkit-appearance: none;
+}
+
+html, body {
+    background-color: $light0;
+}
+* {
+    color: $ltext-color;
+    margin: 0;
+    padding: 0;
+}
+@include dark {
+    html, body {
+        background-color: $dark0;
+    }
+    * {
+        color: $dtext-color;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+
+div#root {
+    margin: 20px;
+}
+
+div.page-header {
+    @include horizontal-flex();
+    align-items: flex-end;
+    margin: 10px 20px;
+    width: 50%;
+    margin: auto;
+    h1 {
+        font-size: 1.6em
+    }
+    .ctrls {
+        @include horizontal-flex();
+        a {
+            color: $gray0;
+            @include dark {
+                color: $gray2;
+            }
+        }
+    }
+
+    @include mobile {
+        h1 {
+            font-size: 1.2em;
+        }
+        .ctrls a {
+            font-size: .8em;
+        }
+    }
+}
+
+hr {
+    margin: 10px auto;
+}
+
+input, button {
+    width: 100%;
+    padding: 15px 30px;
+    outline: none;
+    border: 1px solid $gray2;
+    background-color: transparent;
+    border-radius: 100px;
+    margin: 1px;
+    font-size: 1.2em;
+    @include dark {
+        border-color: $gray0;
+    }
+
+    &:focus {
+        border: 2px solid $sig0;
+        margin: 0;
+    }
+}
+button {
+    width: -moz-fit-content;
+    font-weight: 500;
+    width: fit-content;
+}
