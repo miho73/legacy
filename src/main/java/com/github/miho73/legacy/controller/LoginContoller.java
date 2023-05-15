@@ -15,7 +15,7 @@ import java.io.IOException;
 @RequestMapping("/login")
 public class LoginContoller {
     @GetMapping("")
-    public String responseLoginPage(Model model) {
+    public String responseLoginPage() {
         return "index";
     }
 

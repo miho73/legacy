@@ -1,0 +1,69 @@
+@import 'univ';
+
+.page-header {
+    width: 70% !important;
+}
+hr {
+    width: 70% !important;
+    margin: 10px auto !important;
+}
+@include mobile {
+    .page-header {
+        width: 90% !important;
+    }
+    hr {
+        width: 90% !important;
+    }
+}
+
+.login-section {
+    width: 17%;
+    margin: 50px auto;
+    .header {
+        text-align: center;
+        h2 {
+            font-size: 2em;
+            margin: 20px 0 0 0;
+        }
+        p { 
+            color: $gray0;
+            @include dark {
+                color: $gray2;
+            }
+            font-size: 1.1em;
+            margin: 20px 0 0 0;
+        }
+    }
+
+    @include vertical-flex;
+    gap: 30px;
+    justify-content: space-between;
+
+    .field {
+        @include vertical-flex;
+        gap: 15px;
+    }
+    @include tablet {
+        width: 60%;
+    }
+    @include mobile {
+        width: 80%;
+    }
+}
+
+.active-check-section {
+    p.green {
+        color: $green0;
+    }
+    p.red {
+        color: $red0;
+    }
+    @include dark {
+        p.green {
+            color: $green1;
+        }
+        p.red {
+            color: $red1;
+        }
+    }
+}

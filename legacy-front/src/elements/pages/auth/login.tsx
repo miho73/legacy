@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import '../../css/univ.scss';
-import '../../css/login.scss';
+import '../../../css/univ.scss';
+import '../../../css/login.scss';
 
 function LoginPage() {
     return (
@@ -19,11 +19,11 @@ function LoginPage() {
                     <p>Legacy에 로그인</p>
                 </div>
                 <div className='field'>
-                    <input type='text' name='id' placeholder='ID' autoComplete='username'/>
-                    <input type='password' name='pwd' placeholder='Password' autoComplete='current-password'/>
+                    <input type='text' name='id' placeholder='Legacy ID' autoComplete='username' className='large'/>
+                    <input type='password' name='pwd' placeholder='암호' autoComplete='current-password' className='large'/>
                     <button>로그인</button>
                 </div>
-                <Link to='/signup'>Legacy ID 또는 Password 찾기</Link>
+                <Link to='/login/findmy'>Legacy ID 또는 암호 찾기</Link>
             </form>
         </>
     );
