@@ -1,9 +1,11 @@
 package com.github.miho73.legacy.service;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class SessionService {
     public enum PRIVILEGES {
         USER,
@@ -27,6 +29,7 @@ public class SessionService {
         Integer sp = (Integer)session.getAttribute("priv");
         if(sp == null) return false;
         boolean flag = true;
+
         while(true) {
             boolean i = sp % 2 == 1;
             boolean u = privilege % 2 == 1;

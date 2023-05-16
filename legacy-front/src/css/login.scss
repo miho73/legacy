@@ -2,10 +2,10 @@
 
 .page-header {
     width: 70% !important;
-}
-hr {
-    width: 70% !important;
-    margin: 10px auto !important;
+    hr {
+        width: 70% !important;
+        margin: 10px auto !important;
+    }
 }
 @include mobile {
     .page-header {

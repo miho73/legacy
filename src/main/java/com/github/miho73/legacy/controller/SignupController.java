@@ -6,8 +6,6 @@ import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
-import net.minidev.json.JSONStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,7 +59,12 @@ public class SignupController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public String checkActive(@RequestBody Map<String, Object> body) {
+    public String checkActive(HttpServletResponse response, @RequestBody Map<String, Object> body) {
+        if(!body.containsKey("id") || !body.containsKey("pwd")) {
+            response.setStatus(400);
+            return RestResponse.restResponse(HttpStatus.BAD_REQUEST);
+        }
+
         int active = authService.checkActiveStatus(body.get("id").toString(), body.get("pwd").toString());
         return RestResponse.restResponse(HttpStatus.OK, active);
     }

@@ -1,7 +1,6 @@
 package com.github.miho73.legacy.jpa;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
@@ -47,6 +46,9 @@ public class User {
 
     @Column(name = "status", nullable = false)
     private USER_STATUS status;
+
+    @Column(name = "privilege", nullable = false)
+    private int privilege;
 
     public enum USER_STATUS {
         UNACTIVATED,

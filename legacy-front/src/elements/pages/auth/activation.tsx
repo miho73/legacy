@@ -51,7 +51,7 @@ function ActivationPage() {
                     <div className='field'>
                         <input type='text' name='id' placeholder='Legacy ID' autoComplete='username' value={id} onChange={e => setId(e.target.value)}/>
                         <input type='password' name='pwd' placeholder='암호' autoComplete='current-password' value={pwd} onChange={e => setPwd(e.target.value)}/>
-                        <button type='button' onClick={checkActiveState}>확인</button>
+                        <button className='norm' type='button' onClick={checkActiveState}>확인</button>
                     </div>
                     <Link to='/login/findmy'>Legacy ID 또는 암호 찾기</Link>
                 </form>
@@ -71,7 +71,7 @@ function ActivationPage() {
                     {status.st == 3 &&
                         <p className='red'>인증에 실패했습니다.</p>
                     }
-                    <button onClick={checkAgain}>다시 확인</button>
+                    <button className='norm' onClick={checkAgain}>다시 확인</button>
                 </div>
             }
         </>

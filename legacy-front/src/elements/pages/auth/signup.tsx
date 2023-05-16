@@ -149,7 +149,7 @@ function SignupPage() {
                                 <p>학번을 '1220'과 같은 형태로 적어주세요.</p>
                             }
                         </fieldset>
-                        <button type='button' onClick={() => changeSection(0, 1)}>다음</button>
+                        <button className='norm' type='button' onClick={() => changeSection(0, 1)}>다음</button>
                     </div>
                 }
                 {sectionState === 1 &&
@@ -175,8 +175,8 @@ function SignupPage() {
                             }
                         </fieldset>
                         <div className='button-set'>
-                            <button type='button' onClick={() => changeSection(1, 0)}>이전</button>
-                            <button type='button' onClick={() => create()}>다음</button>
+                            <button className='norm' type='button' onClick={() => changeSection(1, 0)}>이전</button>
+                            <button className='norm' type='button' onClick={() => create()}>다음</button>
                         </div>
                         { getBit(errorState, 6) === 1 &&
                             <p>Legacy ID를 만들지 못했어요.</p>
