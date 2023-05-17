@@ -1,4 +1,4 @@
-package com.github.miho73.legacy.jpa;
+package com.github.miho73.legacy.dto;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

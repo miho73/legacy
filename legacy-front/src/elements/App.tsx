@@ -7,6 +7,7 @@ import ActivationPage from './pages/auth/activation';
 import ActivationDocs from './pages/docs/activation';
 import Index from './pages/legacy';
 import UploadPage from './pages/legacy/upload';
+import Logout from './pages/auth/logout';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path='/signup/activation' element={<ActivationPage/>}/>
                     <Route path='/docs/activation' element={<ActivationDocs/>}/>
                     <Route path='/upload' element={<UploadPage/>}/>
+                    <Route path='/logout' element={<Logout/>}/>
                 </Routes>
             </Router>
         </>

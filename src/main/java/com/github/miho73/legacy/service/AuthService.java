@@ -1,7 +1,7 @@
 package com.github.miho73.legacy.service;
 
+import com.github.miho73.legacy.dto.User;
 import com.github.miho73.legacy.exception.LegacyException;
-import com.github.miho73.legacy.jpa.User;
 import com.github.miho73.legacy.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.github.miho73.legacy.controller;
 
-import com.github.miho73.legacy.jpa.User;
+import com.github.miho73.legacy.dto.User;
 import com.github.miho73.legacy.service.AuthService;
 import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;

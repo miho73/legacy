@@ -1,6 +1,6 @@
 package com.github.miho73.legacy.repository;
 
-import com.github.miho73.legacy.jpa.User;
+import com.github.miho73.legacy.dto.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -133,7 +133,7 @@ hr {
     width: 80%;
 }
 
-input, button.norm {
+input, button.norm, label.btn {
     width: 100%;
     padding: 15px 30px;
     outline: none;
@@ -160,7 +160,7 @@ input, button.norm {
 input.large, button.large {
     font-size: 1.2em;
 }
-input.small, button.small {
+input.small, button.small, label.small {
     font-size: 1em;
     padding: 10px 20px;
     width: -moz-fit-content;
@@ -170,6 +170,9 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
     margin: 0; 
+}
+input[type=file] {
+    display: none;
 }
 div.field {
     width: 100%;
@@ -265,5 +268,8 @@ div.common-section {
     }
     @include mobile() {
         width: 90%;
+    }
+    hr {
+        width: 100% !important;
     }
 }

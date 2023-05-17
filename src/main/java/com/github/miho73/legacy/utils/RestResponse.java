@@ -3,7 +3,9 @@ package com.github.miho73.legacy.utils;
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONStyle;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RestResponse {
     public static String restResponse(HttpStatus status, Object result) {
         JSONObject res = new JSONObject();

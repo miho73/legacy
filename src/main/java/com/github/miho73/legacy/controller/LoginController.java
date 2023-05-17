@@ -1,7 +1,7 @@
 package com.github.miho73.legacy.controller;
 
+import com.github.miho73.legacy.dto.User;
 import com.github.miho73.legacy.exception.LegacyException;
-import com.github.miho73.legacy.jpa.User;
 import com.github.miho73.legacy.service.AuthService;
 import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,10 +52,17 @@ public class LoginController {
         int auth = authService.authenticate(body.get("pwd"), user);
         if(auth == 0) {
             session.setAttribute("priv", user.getPrivilege());
+            session.setAttribute("uuid", user.getUid());
             return RestResponse.restResponse(HttpStatus.OK, 1);
         }
         else {
             return RestResponse.restResponse(HttpStatus.OK, 0);
         }
+    }
+
+    @GetMapping("/logout")
+    public String performLogout(HttpSession session) {
+        session.setAttribute("priv", 0);
+        return "redirect:/";
     }
 }
