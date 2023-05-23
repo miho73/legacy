@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../css/univ.scss';
 import '../../../css/login.scss';
 import { inRange } from '../../service/checker';
@@ -119,7 +119,7 @@ function SignupPage() {
     return (
         <>
             <div className='page-header'>
-                <h1>Legacy ID</h1>
+                <h1><Link to='/'>Legacy ID</Link></h1>
                 <div className='ctrls'>
                     <Link to='/login'>로그인</Link>
                 </div>

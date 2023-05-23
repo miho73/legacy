@@ -15,6 +15,12 @@ server:
   port: 3001
 
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
   session:
     redis:
       namespace: legacy:session

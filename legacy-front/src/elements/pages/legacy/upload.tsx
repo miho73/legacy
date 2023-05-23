@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../css/univ.scss';
 import '../../../css/index.scss';
 import axios from 'axios';
-import {fileFromPath} from 'formdata-node/file-from-path'
+import ErrorPage from '../docs/error'
 import { getBit } from '../../service/bitmask';
 
+/*
 function TagElement(children: React.ReactElement) {
     return (
         <div>
@@ -13,6 +14,7 @@ function TagElement(children: React.ReactElement) {
         </div>
     )
 }
+*/
 
 function UploadPage() {
     const [name, setName] = useState('');
@@ -20,8 +22,23 @@ function UploadPage() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileName, setFileName] = useState('');
     const [error, setError] = useState(0);
+    const [authState, setAuthState] = useState(0);
 
     const navigation = useNavigate();
+
+    // Auth
+    useEffect(() => {
+        axios.get('/login/authorize', {withCredentials: true})
+        .then(res => {
+            if(res.data['result'] === false) {
+                navigation('/login');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            setAuthState(1);
+        });
+    }, []);
 
     const uploadArticle = function() {
         const form = new FormData();
@@ -58,10 +75,16 @@ function UploadPage() {
         return false;
     }
 
+    if(authState === 1) {
+        return (
+            <ErrorPage errorTitle='인증하지 못했어요.' explain='인증서버에 접속하지 못했어요. 잠시 후에 다시 시도해주세요.'/>
+        )
+    }
+
     return (
         <>
             <div className='page-header'>
-                <h1>Legacy</h1>
+                <h1><Link to='/'>Legacy</Link></h1>
                 <div className='ctrls'>
                     <Link to='/logout'>로그아웃</Link>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../css/univ.scss';
 import '../../../css/login.scss';
 import { inRange } from '../../service/checker';
@@ -22,20 +22,23 @@ function LoginPage() {
             errors = changeBit(errors, 1);
         }
         
-        if(errors == 0) {
+        if(errors === 0) {
             axios.post('/login/auth', {
                 id: id,
                 pwd: pwd
             }).then(res => {
-                if(res.data['result'] == 1) {
+                if(res.data['result'] === 1) {
                     navigation('/');
                 }
-                else {
+                else if(res.data['result'] === 2) {
                     setError(4);
+                }
+                else {
+                    setError(8);
                 }
             }).catch(err => {
                 console.error(err);
-                setError(8);
+                setError(16);
             });
         }
         else {
@@ -46,7 +49,7 @@ function LoginPage() {
     return (
         <>
             <div className='page-header'>
-                <h1>Legacy ID</h1>
+                <h1><Link to='/'>Legacy ID</Link></h1>
                 <div className='ctrls'>
                     <Link to='/signup'>Legacy ID 만들기</Link>
                 </div>
@@ -68,9 +71,15 @@ function LoginPage() {
                     }
                     <button className='norm' type='button' onClick={goAuth}>로그인</button>
                     { getBit(error, 2) === 1 &&
-                        <p>Legacy ID 또는 암호가 잘못되었어요.</p>
+                        <>
+                            <p>Legacy ID가 활성화되어 있지 않아요</p>
+                            <p>활성화 확인은 <Link to='/signup/activation'>여기</Link>에서 확인할 수 있어요.</p>
+                        </>
                     }
                     { getBit(error, 3) === 1 &&
+                        <p>Legacy ID 또는 암호가 잘못되었어요.</p>
+                    }
+                    { getBit(error, 4) === 1 &&
                         <p>문제가 발생했어요.</p>
                     }
                 </div>

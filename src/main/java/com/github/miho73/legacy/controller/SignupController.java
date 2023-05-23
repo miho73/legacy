@@ -62,7 +62,7 @@ public class SignupController {
     public String checkActive(HttpServletResponse response, @RequestBody Map<String, Object> body) {
         if(!body.containsKey("id") || !body.containsKey("pwd")) {
             response.setStatus(400);
-            return RestResponse.restResponse(HttpStatus.BAD_REQUEST);
+            return RestResponse.restResponse(HttpStatus.BAD_REQUEST, 1);
         }
 
         int active = authService.checkActiveStatus(body.get("id").toString(), body.get("pwd").toString());

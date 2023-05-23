@@ -106,7 +106,14 @@ div.page-header {
     width: 50%;
     margin: auto;
     h1 {
-        font-size: 1.6em
+        font-size: 1.6em;
+        a {
+            color: $ltext-color;
+            @include dark() {
+                color: $dtext-color;
+            }
+            text-decoration: none;
+        }
     }
     .ctrls {
         @include horizontal-flex();

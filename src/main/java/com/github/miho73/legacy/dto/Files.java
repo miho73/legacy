@@ -21,4 +21,7 @@ public class Files {
     
     @Column(name = "datum", nullable = false)
     private byte[] data;
+
+    @Column(name = "file_name", nullable = false)
+    private String fileName;
 }

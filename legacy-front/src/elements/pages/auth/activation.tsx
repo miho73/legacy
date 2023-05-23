@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../../css/univ.scss';
 import '../../../css/login.scss';
 import axios from 'axios';
@@ -22,6 +22,10 @@ function ActivationPage() {
             })
         }).catch((err) => {
             console.error(err);
+            setStatus({
+                disp: true,
+                st: 9
+            })
         });
         return false;
     }
@@ -30,13 +34,15 @@ function ActivationPage() {
         setStatus({
             disp: false,
             st: -1
-        })
+        });
     }
 
     return (
         <>
             <div className='page-header'>
-                <h1>Legacy ID 활성화</h1>
+                <h1>
+                    <Link to='/'>Legacy ID Activation</Link>
+                </h1>
                 <div className='ctrls'>
                     <Link to='/login'>로그인</Link>
                 </div>
@@ -59,17 +65,20 @@ function ActivationPage() {
             {status.disp &&
                 <div className='login-section active-check-section'>
                     <h2>{id}에 대한 활성화 확인</h2>
-                    {status.st == 0 &&
+                    {status.st === 0 &&
                         <p className='green'>활성화됨</p>
                     }
-                    {status.st == 1 &&
+                    {status.st === 1 &&
                         <p className='red'>활성화 되지 않음</p>
                     }
-                    {status.st == 2 &&
+                    {status.st === 2 &&
                         <p className='red'>거절됨</p>
                     }
-                    {status.st == 3 &&
+                    {status.st === 3 &&
                         <p className='red'>인증에 실패했습니다.</p>
+                    }
+                    {status.st === 9 &&
+                        <p className='red'>확인 중 문제가 발생했습니다.</p>
                     }
                     <button className='norm' onClick={checkAgain}>다시 확인</button>
                 </div>

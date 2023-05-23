@@ -3,6 +3,7 @@ package com.github.miho73.legacy.controller;
 import com.github.miho73.legacy.dto.User;
 import com.github.miho73.legacy.exception.LegacyException;
 import com.github.miho73.legacy.service.AuthService;
+import com.github.miho73.legacy.service.SessionService;
 import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +22,9 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     AuthService authService;
+
+    @Autowired
+    SessionService sessionService;
 
     @GetMapping("")
     public String responseLoginPage() {
@@ -50,10 +54,16 @@ public class LoginController {
             return RestResponse.restResponse(HttpStatus.OK, 0);
         }
         int auth = authService.authenticate(body.get("pwd"), user);
+        int active = authService.checkActiveStatus(body.get("id"), body.get("pwd"));
         if(auth == 0) {
-            session.setAttribute("priv", user.getPrivilege());
-            session.setAttribute("uuid", user.getUid());
-            return RestResponse.restResponse(HttpStatus.OK, 1);
+            if(active == 0) {
+                session.setAttribute("priv", user.getPrivilege());
+                session.setAttribute("uuid", user.getUid());
+                return RestResponse.restResponse(HttpStatus.OK, 1);
+            }
+            else {
+                return RestResponse.restResponse(HttpStatus.OK, 2);
+            }
         }
         else {
             return RestResponse.restResponse(HttpStatus.OK, 0);
@@ -64,5 +74,13 @@ public class LoginController {
     public String performLogout(HttpSession session) {
         session.setAttribute("priv", 0);
         return "redirect:/";
+    }
+
+    @GetMapping("authorize")
+    @ResponseBody
+    public String authorize(HttpSession session, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        boolean priv =sessionService.checkPrivilege(session, sessionService.privilegeOf(true, false));
+        return RestResponse.restResponse(HttpStatus.OK, priv);
     }
 }
