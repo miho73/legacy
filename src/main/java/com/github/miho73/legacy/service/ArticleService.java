@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -55,15 +56,18 @@ public class ArticleService {
         articleRepository.save(article);
     }
 
-    public void saveFile(MultipartFile file, String hash, String fileName) throws IOException {
+    public void saveFile(MultipartFile file, String hash, String fileName, long size) throws IOException {
         Files fileObj = new Files();
         fileObj.setData(file.getBytes());
         fileObj.setFileHash(hash);
         fileObj.setFileName(fileName);
+        fileObj.setSize(size);
         filesRepository.save(fileObj);
     }
 
     private JSONArray putInJsonArray(List<Articles> articles) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
         JSONArray ret = new JSONArray();
         articles.forEach(e -> {
             JSONObject toAdd = new JSONObject();
@@ -71,14 +75,10 @@ public class ArticleService {
             toAdd.put("explain", e.getExplain());
             toAdd.put("tags", e.getTags());
             toAdd.put("hash", e.getFileHash());
+            toAdd.put("date", sdf.format(e.getDateUp()));
             ret.add(toAdd);
         });
         return ret;
-    }
-
-    public JSONArray getArticleByUidRange(int from, int to) {
-        List<Articles> articles = articleRepository.findByUidInRange(from, to);
-        return putInJsonArray(articles);
     }
 
     public JSONArray getArticleFromBack(int len) {

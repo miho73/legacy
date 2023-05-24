@@ -24,4 +24,7 @@ public class Files {
 
     @Column(name = "file_name", nullable = false)
     private String fileName;
+
+    @Column(name = "file_size", nullable = false)
+    private long size;
 }

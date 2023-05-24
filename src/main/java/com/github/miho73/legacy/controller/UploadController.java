@@ -65,7 +65,7 @@ public class UploadController {
             }
 
             articleService.saveArticle(hash, uploadForm.getName(), uploadForm.getExplain(), uploadForm.getTags(), (int)session.getAttribute("uuid"));
-            articleService.saveFile(uploadForm.getFile(), hash, uploadForm.getName());
+            articleService.saveFile(uploadForm.getFile(), hash, uploadForm.getFile_name(), uploadForm.getFile().getSize());
             return RestResponse.restResponse(HttpStatus.OK, hash);
         } catch (NoSuchAlgorithmException e) {
             log.error("NoSuchAlgorithmException", e);
@@ -74,3 +74,5 @@ public class UploadController {
         }
     }
 }
+
+//TODO: 1. 파일 업로드시 파일 이름 같이 보내기. 2. 파일 업로드 중 인터랙션 막고 업로드중 띄우기

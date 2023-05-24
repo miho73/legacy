@@ -43,7 +43,6 @@
         @include vertical-flex;
         gap: 15px;
         p {
-            width: 150%;
             text-align: center;
             @include tablet {
                 width: 100%;

@@ -23,6 +23,8 @@ function UploadPage() {
     const [fileName, setFileName] = useState('');
     const [error, setError] = useState(0);
     const [authState, setAuthState] = useState(0);
+    const [auth, setAuth] = useState(true);
+    const [uploading, setUploading] = useState(false);
 
     const navigation = useNavigate();
 
@@ -32,19 +34,27 @@ function UploadPage() {
         .then(res => {
             if(res.data['result'] === false) {
                 navigation('/login');
+                setAuth(false);
+            }
+            else {
+                setAuth(true);
             }
         })
         .catch(err => {
             console.error(err);
             setAuthState(1);
+            setAuth(false);
         });
     }, []);
 
     const uploadArticle = function() {
+        setUploading(true);
+
         const form = new FormData();
         form.append("name", name);
         form.append("explain", explain);
         form.append("tags", '0');
+        form.append("file_name", fileName);
         form.append('file', selectedFile);
 
         axios.post('/upload/cdn/post', form, {
@@ -70,6 +80,9 @@ function UploadPage() {
                     setError(8);
                     break;
             }
+        })
+        .finally(() => {
+            setUploading(false);
         });
 
         return false;
@@ -78,6 +91,20 @@ function UploadPage() {
     if(authState === 1) {
         return (
             <ErrorPage errorTitle='인증하지 못했어요.' explain='인증서버에 접속하지 못했어요. 잠시 후에 다시 시도해주세요.'/>
+        )
+    }
+
+    if(!auth) {
+        return (
+            <>
+                <div className='page-header'>
+                    <h1><Link to='/'>Legacy</Link></h1>
+                </div>
+                <hr/>
+                <div className='common-section index upload'>
+                    <p>Authorizing</p>
+                </div>
+            </>
         )
     }
 
@@ -94,15 +121,20 @@ function UploadPage() {
                 <form>
                     <div className='header'>
                         <div className='search'>
-                            <input type='text' name='name' placeholder='이름' className='small' value={name} onChange={e => setName(e.target.value)}/>
+                            <input type='text' name='name' placeholder='이름' className='small' value={name} onChange={e => setName(e.target.value)} disabled={uploading}/>
                         </div>
-                        <button type='button' className='small norm' onClick={uploadArticle}>업로드</button>
+                        {!uploading &&
+                            <button type='button' className='small norm' onClick={uploadArticle}  disabled={uploading}>업로드</button>
+                        }
+                        {uploading &&
+                            <button type='button' className='small norm' onClick={uploadArticle}  disabled={uploading}>업로드중</button>
+                        }
                     </div>
                     <hr style={{width: '100% !important'}}/>
                     <div className='content'>
                         <fieldset>
                                 <label>설명</label>
-                                <textarea className='explain' name='explain' placeholder='설명' value={explain} onChange={e => setExplain(e.target.value)}></textarea>
+                                <textarea className='explain' name='explain' placeholder='설명' value={explain} onChange={e => setExplain(e.target.value)} disabled={uploading}></textarea>
                             </fieldset>
                             <fieldset>
                             <label>파일</label>
@@ -125,7 +157,7 @@ function UploadPage() {
                             <input type='file' name='file' id='fs' className='norm small' onChange={e => {
                                 setSelectedFile(e.target.files[0]);
                                 setFileName(e.target.files[0].name);
-                            }}/>
+                            }} disabled={uploading}/>
                         </fieldset>
                         <input name='tags' value={0} hidden/>
                     </div>

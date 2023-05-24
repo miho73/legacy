@@ -11,4 +11,5 @@ public class UploadForm {
     private String explain;
     private int tags;
     private MultipartFile file;
+    private String file_name;
 }
