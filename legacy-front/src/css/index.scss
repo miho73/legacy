@@ -1,0 +1,80 @@
+@import 'univ';
+
+div.index {
+    margin-top: 50px;
+    .header {
+        @include horizontal-flex;
+        justify-content: space-between;
+        .search {
+            @include horizontal-flex;
+        }
+    }
+    hr {
+        margin: 10px 0 0 0;
+    }
+    .list {
+        padding: 0 20px 10px 20px;
+        @include vertical-flex;
+        hr {
+            
+        }
+        .element {
+            width: 100%;
+            padding-top: 7px;
+            .head, .details {
+                width: 100%;
+                padding-bottom: 5px;
+                border-bottom: 1px solid $gray0;
+                @include dark {
+                    border-color: $gray2;
+                }
+                @include horizontal-flex;
+                justify-content: space-between;
+                .more {
+                    fill: $dark0;
+                    padding: 5px;
+                    @include dark {
+                        fill: $light0;
+                    }
+                }
+            }
+            .head {
+                .left {
+                    p {
+                        font-weight: 600;
+                        font-size: 1.1em;
+                    }
+                }
+                .right {
+                    @include horizontal-flex;
+                    gap: 10px;
+                }
+            }
+            .details {
+                padding-top: 5px;
+                min-height: 50px;
+                .left {
+                    margin-left: 20px;
+                }
+                .right {
+                    @include vertical-flex;
+                }
+            }
+        }
+    }
+}
+
+.upload {
+    fieldset {
+        margin-top: 20px;
+        @include vertical-flex;
+        align-items: flex-start;
+        label {
+            font-size: 1.2em;
+            margin: 0 0 5px 10px;
+        }
+        span.filename {
+            margin-left: 20px;
+        }
+    }
+}
