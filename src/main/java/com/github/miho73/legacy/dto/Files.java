@@ -14,8 +14,8 @@ public class Files {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
 
-    @Length(min = 24, message = "{validation.name.size.too_short}")
-    @Length(max = 24, message = "{validation.name.size.too_long}")
+    @Length(min = 44, message = "{validation.name.size.too_short}")
+    @Length(max = 44, message = "{validation.name.size.too_long}")
     @Column(name = "hash", nullable = false)
     private String fileHash;
     

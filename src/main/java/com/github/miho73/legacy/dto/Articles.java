@@ -26,8 +26,8 @@ public class Articles {
     @Column(name = "explain", nullable = false)
     private String explain;
 
-    @Length(min = 24, message = "{validation.name.size.too_short}")
-    @Length(max = 24, message = "{validation.name.size.too_long}")
+    @Length(min = 44, message = "{validation.name.size.too_short}")
+    @Length(max = 44, message = "{validation.name.size.too_long}")
     @Column(name = "file_hash", nullable = false)
     private String fileHash;
 

@@ -5,6 +5,7 @@ import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ArticlesRepository extends JpaRepository<Articles, Integer> {
@@ -24,5 +25,14 @@ public interface ArticlesRepository extends JpaRepository<Articles, Integer> {
     )
     List<Articles> searchByQuery(
             @Param("query") String query
+    );
+
+    @Query(
+            value = "UPDATE data.articles SET downs=downs+1, last_down=:lstDwn WHERE file_hash=:hash",
+            nativeQuery = true
+    )
+    void downloadArticle(
+            @Param("hash") String hash,
+            @Param("lstDwn") Timestamp lstDwn
     );
 }

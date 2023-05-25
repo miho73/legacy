@@ -6,6 +6,7 @@ import com.github.miho73.legacy.repository.ArticlesRepository;
 import com.github.miho73.legacy.repository.FilesRepository;
 import com.github.miho73.legacy.utils.SHA;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ArticleService {
     @Autowired
     SHA sha;
@@ -41,7 +44,8 @@ public class ArticleService {
     }
 
     public String calculateHash(MultipartFile file) throws IOException, NoSuchAlgorithmException {
-        return sha.MD5(file.getBytes());
+        log.debug("Hash: "+sha.SHA256(file.getBytes()));
+        return sha.SHA256(file.getBytes());
     }
 
     public void saveArticle(String hash, String name, String explain, int tags, int uploadedBy) {
@@ -89,5 +93,9 @@ public class ArticleService {
     public JSONArray searchArticleByQuery(String query) {
         List<Articles> articles = articleRepository.searchByQuery(query);
         return putInJsonArray(articles);
+    }
+
+    public void downloadedArticle(String hash) {
+        articleRepository.downloadArticle(hash, new Timestamp(System.currentTimeMillis()));
     }
 }

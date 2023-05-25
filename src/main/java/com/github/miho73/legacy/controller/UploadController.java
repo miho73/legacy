@@ -74,5 +74,3 @@ public class UploadController {
         }
     }
 }
-
-//TODO: 1. 파일 업로드시 파일 이름 같이 보내기. 2. 파일 업로드 중 인터랙션 막고 업로드중 띄우기

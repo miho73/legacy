@@ -2,6 +2,7 @@ package com.github.miho73.legacy.controller;
 
 import com.github.miho73.legacy.dto.Files;
 import com.github.miho73.legacy.repository.FilesRepository;
+import com.github.miho73.legacy.service.ArticleService;
 import com.github.miho73.legacy.service.SessionService;
 import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +27,8 @@ import java.io.InputStream;
 public class CdnController {
     @Autowired
     FilesRepository filesRepository;
+    @Autowired
+    ArticleService articleService;
 
     @Autowired
     SessionService sessionService;
@@ -64,6 +67,8 @@ public class CdnController {
             InputStream is = new ByteArrayInputStream(file);
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
+
+            articleService.downloadedArticle(hash);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
