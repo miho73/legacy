@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="jasypt.password" value="1234" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.github.miho73.legacy.LegacyApplication" />
+    <module name="legacy.main" />
+    <option name="VM_PARAMETERS" value="-Xms100m -Xmx5g -Dspring.profiles.active=test -Djasypt.password=1234" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

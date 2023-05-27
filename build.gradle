@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group = 'com.github.miho73'
+group = 'com.github.miho73.legacy'
 version = '1.0.0'
 sourceCompatibility = '17'
 
@@ -18,6 +18,10 @@ repositories {
 	mavenCentral()
 }
 
+springBoot {
+	mainClass = 'com.github.miho73.legacy.LegacyApplication'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -28,6 +32,7 @@ dependencies {
 	implementation 'com.google.guava:guava:30.0-jre'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'

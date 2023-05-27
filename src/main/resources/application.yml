@@ -34,13 +34,13 @@ spring:
       static-locations: classpath:/static
 
   datasource:
-    url: jdbc:postgresql://localhost:8473/neon
-    username: neon
-    password: zKvHLM5WqoDuWWL5Uu984pIz9ytRStZq
+    url: ENC(TFHjau73nKpyZUu+7hIjekq33v064vV2+ac7GvbOY0/izCepr3SIsDvJN2b8Ptq1LES3h3Zzqk0kvhfZAlZX/QWlvQCFmALr0ZRoZHntABQ=)
+    username: ENC(cRFc82x1yBOiKIvWHkKL09BNpdoQY89hebGR6P8qgqboeqCEuzGfgffgVX3ZXQpZ)
+    password: ENC(kmPEcwEBLGVQIiKmLWZSMNjXLTxyuCKRvTjkUEH3KjxfCEW9OVGX44k80I55ToUY3rXdAZ5a7HwO8QUWxRkeQOn/fh7Qdedy6PXOSRF7OhCkIqDLe/BNHDrb5z7hUcMiZenoiFSXiKA5NZXkv/xOfA==)
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    show-sql: true
+    show-sql: false
 
   data:
     redis:

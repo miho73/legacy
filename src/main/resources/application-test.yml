@@ -6,7 +6,7 @@ server:
         path: /
         same-site: strict
         http-only: true
-        secure: true
+        secure: false
   error:
     include-stacktrace: never
     include-exception: false
@@ -34,9 +34,9 @@ spring:
       static-locations: classpath:/static
 
   datasource:
-    url: jdbc:postgresql://localhost:8473/neon
-    username: neon
-    password: zKvHLM5WqoDuWWL5Uu984pIz9ytRStZq
+    url: ENC(9AItb1GKpg5+epzH1JmuxHOgVP7TmyV8h9IEQTOuFOPsSFjR5Dthhu+ASzLIbQEc8UZrdXiSUyI4Fk+2BvwXbmvWklqyURevFy0VxWVTLRs=)
+    username: ENC(vNVfcvvErIsea7uBF0I16DPZVT6XdTlwTDVvhHrfUEftjNktoEDMrltR6drEk+8J)
+    password: ENC(XocV1gFO+q78pqqpLTnU7UiQY3layssp6gL+RDPyHm0ZHUUa2BzKJMlVMdimmVE1E2a+RPOhUPwPqXogpKXSOVunzdQDYInXHHVnzlhGNPs=)
     driver-class-name: org.postgresql.Driver
 
   jpa:
