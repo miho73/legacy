@@ -40,7 +40,7 @@ spring:
   datasource:
     url: ENC(nZwti+p3URaSVMnRMQRYmtpvACCdD26XuvyeRuy7P6L5MnB3RjLGepyPkwl20BCsahYebAl7R9GHsiExKVtppszShRS9nh3sU5Hu623DDxw=)
     username: ENC(aESzkAhpB4weV2x7SZCDSpiFyIgslo7Q9h676juOKOOv7DVpbqeqDdXFtEawbKWo)
-    password: ENC(XGTSlFfNeXvMBsZWxnWv2Q2NQnBMXdG3Rjd/inna9E2+VQPv2yxRuiekd7dfnZuplmKoCmgQanQhMD9OeE6xfA5KQS664H3hAlUbSx5i3x8=)
+    password: ENC(bInrY0ihwXWwOSMSsLg7l/DSD8FftWWAupeydJ0IdF4sM/waSmtOAPWFD5wMDwqz3Mx1nETIKS62iy08STu3sxnzKN7Tk5ddy47/D5wvnc1XPRyqZQ8F3VR/zfj4gf4cTCjb3qnR5dy9eWJ+YzCsnA==)
     driver-class-name: org.postgresql.Driver
 
   jpa:
