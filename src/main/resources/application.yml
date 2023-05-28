@@ -12,6 +12,10 @@ server:
     include-exception: false
     whitelabel:
       enabled: false
+  ssl:
+    key-store: keystore.p12
+    key-store-type: PKCS12
+    key-store-password: ENC(8kAuA667uR9nF19n8OH/G9EYKyS3E+HMmN05tUV7jX8xwweblxUqddi+jq9E3vOBMoNQ34/M8aWI8J2/nzWPRbtpxm0UvMCA+xP7i8g4UaA=)
   port: 3001
 
 spring:
@@ -34,9 +38,9 @@ spring:
       static-locations: classpath:/static
 
   datasource:
-    url: ENC(TFHjau73nKpyZUu+7hIjekq33v064vV2+ac7GvbOY0/izCepr3SIsDvJN2b8Ptq1LES3h3Zzqk0kvhfZAlZX/QWlvQCFmALr0ZRoZHntABQ=)
-    username: ENC(cRFc82x1yBOiKIvWHkKL09BNpdoQY89hebGR6P8qgqboeqCEuzGfgffgVX3ZXQpZ)
-    password: ENC(kmPEcwEBLGVQIiKmLWZSMNjXLTxyuCKRvTjkUEH3KjxfCEW9OVGX44k80I55ToUY3rXdAZ5a7HwO8QUWxRkeQOn/fh7Qdedy6PXOSRF7OhCkIqDLe/BNHDrb5z7hUcMiZenoiFSXiKA5NZXkv/xOfA==)
+    url: ENC(nZwti+p3URaSVMnRMQRYmtpvACCdD26XuvyeRuy7P6L5MnB3RjLGepyPkwl20BCsahYebAl7R9GHsiExKVtppszShRS9nh3sU5Hu623DDxw=)
+    username: ENC(aESzkAhpB4weV2x7SZCDSpiFyIgslo7Q9h676juOKOOv7DVpbqeqDdXFtEawbKWo)
+    password: ENC(XGTSlFfNeXvMBsZWxnWv2Q2NQnBMXdG3Rjd/inna9E2+VQPv2yxRuiekd7dfnZuplmKoCmgQanQhMD9OeE6xfA5KQS664H3hAlUbSx5i3x8=)
     driver-class-name: org.postgresql.Driver
 
   jpa:

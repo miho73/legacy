@@ -12,6 +12,10 @@ server:
     include-exception: false
     whitelabel:
       enabled: false
+  ssl:
+    key-store: keystore.p12
+    key-store-type: PKCS12
+    key-store-password: ENC(Y9OeGJVYMBN/c4bQH26jh2eo/gP7Rz7S/eC17ajttki9MNUYivVjuw/UEnTu87frdBTKyrlsPRicDYMlyQBGMeRE+UZJNcIqf7OEJY0C0Uc=)
   port: 3001
 
 spring:
