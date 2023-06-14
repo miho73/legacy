@@ -7,6 +7,7 @@ import com.github.miho73.legacy.service.SessionService;
 import com.github.miho73.legacy.utils.RestResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @Slf4j
@@ -37,11 +40,12 @@ public class CdnController {
             value = "/get/{hash}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
+    @Transactional
     public void downloadFile(
             @PathVariable("hash") String hash,
             HttpServletResponse response,
             HttpSession session
-    ) {
+    ) throws IOException {
         try {
             if(!sessionService.checkPrivilege(session, sessionService.privilegeOf(true, false))) {
                 response.setStatus(403);
@@ -63,13 +67,26 @@ public class CdnController {
 
             Files fileDto = filesRepository.findByFileHash(hash).get(0);
             byte[] file = fileDto.getData();
-            response.setHeader("Content-Disposition", "attachment;filename=" + fileDto.getFileName());
+            log.info("filename: "+fileDto.getFileName());
+
+            String fileName = URLEncoder.encode(fileDto.getFileName(), StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+
+            response.setContentType("application/octet-stream; charset=utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+fileName);
+
+            articleService.downloadedArticle(hash);
             InputStream is = new ByteArrayInputStream(file);
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
 
-            articleService.downloadedArticle(hash);
-        } catch (IOException e) {
+        } catch (Exception e) {
+            log.error("Cannot serve file", e);
+            response.setStatus(500);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print(RestResponse.restResponse(HttpStatus.INTERNAL_SERVER_ERROR,3));
+            response.flushBuffer();
             throw new RuntimeException(e);
         }
     }

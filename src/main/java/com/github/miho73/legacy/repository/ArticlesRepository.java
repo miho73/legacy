@@ -3,6 +3,7 @@ package com.github.miho73.legacy.repository;
 import com.github.miho73.legacy.dto.Articles;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.sql.Timestamp;
@@ -31,6 +32,7 @@ public interface ArticlesRepository extends JpaRepository<Articles, Integer> {
             value = "UPDATE data.articles SET downs=downs+1, last_down=:lstDwn WHERE file_hash=:hash",
             nativeQuery = true
     )
+    @Modifying
     void downloadArticle(
             @Param("hash") String hash,
             @Param("lstDwn") Timestamp lstDwn
