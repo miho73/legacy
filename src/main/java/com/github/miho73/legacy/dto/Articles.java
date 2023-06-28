@@ -17,7 +17,7 @@ public class Articles {
     private int uid;
 
     @Length(min = 1,  message = "{validation.name.size.too_short}")
-    @Length(max = 10, message = "{validation.name.size.too_long}")
+    @Length(max = 100, message = "{validation.name.size.too_long}")
     @Column(name = "name", nullable = false)
     private String name;
 
